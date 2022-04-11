@@ -1,0 +1,580 @@
+// ==================== GOOGLE FONTS ===================
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Oswald:wght@700&display=swap');
+
+// ==================== VARIABLES ===================
+:root {
+  --clr-primary: hsl(40, 20%, 56%);
+  --clr-neutral-900: hsl(226, 16%, 21%);
+  --clr-neutral-800: hsl(226, 15%, 27%);
+  --clr-neutral-700: hsl(225, 7%, 47%);
+  --clr-neutral-600: hsl(225, 7%, 90%);
+  --clr-neutral-100: hsl(0, 0%, 100%);
+
+  --fs-900: 3rem;
+  --fs-800: 1.875rem;
+  --fs-700: 1.3125rem;
+  --fs-600: 1.125rem;
+  --fs-500: 1rem;
+  --fs-400: .938rem;
+  --fs-300: .875rem;
+
+  --ff-primary: 'Oswald', sans-serif;
+  --ff-secondary: 'Montserrat', sans-serif;
+
+  --fw-regular: 400;
+  --fw-bold: 700;
+
+  --space: 1rem;
+}
+
+@media screen and (min-width: 700px) {
+  :root {
+    --fs-900: 4rem;
+    --fs-800: 2rem;
+    --fs-700: 1.5rem;
+    --fs-600: 1.3125rem;
+    --fs-500: 1.225rem;
+    --fs-400: 1.125rem;
+    --fs-300: 1rem;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  :root {
+    --fs-900: 5.625rem;
+    --fs-800: 2.25rem;
+    --fs-700: 1.875rem;
+    --fs-600: 1.5rem;
+    --fs-500: 1.3125rem;
+    --fs-400: 1.125rem;
+  }
+}
+
+// ==================== MODERN CSS RESET ===================
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+   scroll-behavior: auto;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+// ==================== BASE ===================
+body {
+  font-family: var(--ff-secondary);
+  font-size: var(--fs-300);
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--ff-primary);
+  font-weight: var(--fw-bold);
+  line-height: 1.1;
+}
+
+button {
+  cursor: pointer;
+  padding: 0;
+}
+
+// ==================== UTILITY ===================
+.container {
+  width: 80%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.flex {
+  display: flex;
+}
+
+.flow-x > * + * {
+  margin-left: var(--space, 1rem);
+}
+
+.flow-y > * + * {
+  margin-top: var(--space, 1rem);
+}
+
+.section {
+  padding: 5rem 0;
+}
+
+// ==================== HEADER ===================
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4.5rem;
+  background-color: var(--clr-neutral-900);
+  padding: 1em 0;
+  text-align: center;
+  z-index: 100;
+
+  &__container {
+    align-items: center;
+  }
+}
+
+// Logo
+.logo {
+  &__img {
+    height: 2.5rem;
+  }
+}
+
+
+// BURGER 
+.burger {
+  position: absolute;
+  right: 2rem;
+  top: 1rem;
+  width: 2.5em;
+  height: 2.5em;
+  color: var(--clr-neutral-800);
+  border-radius: 50%;
+  border: 0;
+  background-color: var(--clr-neutral-100);
+  transition: .3s ease;
+
+
+  &__line, &__line::before, &__line::after {
+    display: block;
+    margin: 0 auto;
+    height: 3px;
+    background-color: var(--clr-neutral-800);
+    transition: .3s ease;
+  }
+
+  &__line {
+    position: relative;
+    width: 50%;
+
+    &::before, &::after {
+      content: '';
+      width: 100%;
+    }
+
+    &::before {
+      transform: translateY(-6px);
+    }
+
+    &::after {
+      transform: translateY(3px);
+    }
+  }
+
+  &:hover {
+    background-color: var(--clr-neutral-700);
+  }
+
+  &:hover &__line,  &:hover &__line::before, &:hover &__line::after {
+    background-color: var(--clr-neutral-100);
+  }
+}
+
+// NAV
+.nav {
+  position: absolute;
+  top: 4.5rem;
+  right: -100%;
+  height: calc(100vh - 4.5rem);
+  width: 80%;
+  z-index: 10;
+  background-color: var(--clr-neutral-900);
+  transition: .3s;
+  
+
+  &__list {
+    --space: 1.5rem;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space, 1.5rem);
+  }
+
+  &__link {
+    font-family: var(--ff-primary);
+    font-size: var(--fs-400);
+    color: var(--clr-neutral-100);
+    text-decoration: none;
+    transition: .3s;
+    text-transform: uppercase;
+
+    &:hover {
+      color: var(--clr-neutral-700);
+    }
+  }
+
+  &--visible {
+    right: 0;;
+  }
+}
+
+// CTA-link
+.cta-link {
+  background-color: var(--clr-primary);
+  padding: .25em 1em;
+  border-radius: 2rem;
+  transition: .3s ease;
+
+  &:hover {
+    color: var(--clr-neutral-900);
+  }
+}
+
+// main
+.main {
+  margin-top: 4.5rem;
+}
+
+// ================= PROMO ==================
+.promo {
+  background-color: var(--clr-neutral-800);
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+
+  &__title {
+    font-size: var(--fs-900);
+    color: var(--clr-neutral-100);
+
+    span {
+      color: var(--clr-primary);
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    justify-content: flex-end;
+    align-items: flex-start;
+    color: var(--clr-neutral-100);
+    font-size: var(--fs-600);
+  }
+
+  &__link {
+    display: inline-block;
+    color: inherit;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+}
+
+// ==================== FEATURES ===================
+.features {
+  background-color: var(--clr-neutral-600);
+
+  &__container {
+    display: flex;
+  }
+
+  &__list {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    list-style-type: none;
+    text-align: center;
+  }
+
+  &__item {
+    & > * + *  {
+      margin-top: 1rem;
+    }
+  }
+
+  &__title {
+    font-size: var(--fs-700);
+    color: var(--clr-primary);
+
+  }
+}
+
+
+// ==================== INFO ===================
+.info {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  &__steps {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem;
+    color: var(--clr-neutral-100);
+    background-color: var(--clr-neutral-800);
+    text-align: center;
+
+    h3 {
+      font-size: var(--fs-700);
+    }
+
+    p {
+      font-size: var(--fs-400);
+    }
+  }
+}
+
+.article {
+  --space: 2rem;
+
+  &__title {
+    font-size: var(--fs-800);
+    color: var(--clr-primary);
+  }
+
+  &__text {
+    font-size: var(--fs-500);
+  }
+}
+
+
+// ==================== FOOTER ===================
+.footer {
+  background-color: var(--clr-neutral-800);
+  color: var(--clr-neutral-700);
+  font-size: var(--fs-500);
+  
+
+  &__title {
+    font-size: var(--fs-800);
+    color: var(--clr-neutral-100);
+  }
+
+  &__wrap {
+    margin-top: 3rem;
+    display: grid;
+    gap: 3rem;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    h4 {
+      font-size: var(--fs-700);
+      color: var(--clr-primary);
+    }
+  }
+
+  &__list {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+
+    & > * + * {
+      margin-top: 1.5rem;
+    }
+  }
+
+  &__link {
+    color: inherit;
+    text-decoration: none;
+    transition: .3s;
+
+    &:hover {
+      color: var(--clr-neutral-100);
+    }
+  }
+}
+
+// ============= Media queries ==============
+@media screen and (min-width: 700px) {
+  .burger {
+    display: none;
+  }
+
+  .header {
+    &__container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  .nav {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: auto;
+    inset: initial;
+
+    & > * + * {
+      margin-left: 3rem;
+    }
+
+
+    &__list {
+      --space: 2rem;
+      flex-direction: row;
+      padding: 0;
+
+      &--primary {
+        margin-left: auto;
+      }
+    }
+  }
+
+  .features {
+    &__list {
+      flex-direction: row;
+    }
+  }
+
+  .info {
+    &__steps {
+      flex-direction: row;
+    }
+  }
+
+  .footer {
+    font-size: var(--fs-300);
+
+
+    &__wrap {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    &__info {
+      h4 {
+        font-size: var(--fs-500);
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 700px) and (max-width: 1000px) {
+  .info {
+    &__card {
+      justify-content: space-between;
+
+      h3 {
+        font-size: 1.3rem;
+      }
+      
+      p {
+        font-size: .8rem;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .promo {
+    &__container {
+      flex-direction: row;
+    }    
+  }
+
+  .info {
+    &__container {
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 3rem;
+    }
+
+    &__content {
+      width: 60%;
+    }
+
+    &__steps {
+      width: 35%;
+      flex-direction: column;
+    }
+  }
+
+  .footer {
+    &__wrap {
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 2rem;
+    }
+  }
+}
